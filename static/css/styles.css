@@ -1,0 +1,14 @@
+html,
+body { height: 100%; }
+body.portada { }
+#wrap { min-height: 100%; height: auto; margin: 0 auto -60px; padding: 0 0 60px; }
+#footer { height: 60px; background-color: #f5f5f5; }
+#wrap > .container { padding: 60px 15px 0; }
+.container .credit { margin: 20px 0; }
+#footer > .container { padding-left: 15px; padding-right: 15px; }
+.navbar-brand { line-height: 30px; padding: 8px; }
+#splash { height: 540px; background: url(/static/img/wallpaper.jpg); background-size: cover; }
+#splash .row { margin-top: 100px;}
+#splash h1 { font-size: 44px; margin-bottom: 0; color: white; font-variant: small-caps;}
+#splash p.lead { font-size: 20px; font-variant: small-caps; color: #f0f0f0; }
+.navbar-nav > li > a { padding-bottom: 13px; padding-top: 13px; }
