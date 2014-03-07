@@ -7,8 +7,11 @@ body.portada { }
 .container .credit { margin: 20px 0; }
 #footer > .container { padding-left: 15px; padding-right: 15px; }
 .navbar-brand { line-height: 30px; padding: 8px; }
-#splash { height: 540px; background: url(/static/img/wallpaper.jpg); background-size: cover; }
+#splash { height: 690px; background: url(/static/img/wallpaper.jpg); background-size: cover; overflow: hidden;}
 #splash .row { margin-top: 100px;}
-#splash h1 { font-size: 44px; margin-bottom: 0; color: white; font-variant: small-caps;}
-#splash p.lead { font-size: 20px; font-variant: small-caps; color: #f0f0f0; }
+#splash h1 { font-size: 44px; margin-bottom: 0; color: white; font-variant: small-caps; text-align: center;}
+#splash p.lead { font-size: 20px; font-variant: small-caps; color: #f0f0f0; text-align: center; }
 .navbar-nav > li > a { padding-bottom: 13px; padding-top: 13px; }
+.spaceup { margin-top: 20px;}
+#undersplash { background: #001d25; color: white; padding-top: 40px; padding-bottom: 35px; }
+#undersplash .righttext { border-right: solid 1px white;}

@@ -15,6 +15,16 @@ urlpatterns = patterns('',
     #url(r'^simple/', include('simple.urls')),
     (r'^tw/', include('twython_django_oauth.urls')),
     (r'^logged$', 'aut.views.logged'),
+    (r'^dashboard$', 'aut.views.dashboard'),
+    (r'^definitions$', 'aut.definitions.view'),
+    (r'^users$', 'aut.users.view'),
+    (r'^analytics$', 'aut.analytics.view'),
+
+    # tedious pages
+    (r'^features$', 'aut.pages.features'),
+    (r'^pricing$', 'aut.pages.pricing'),
+    (r'^about$', 'aut.pages.about'),
+
 )
 
 

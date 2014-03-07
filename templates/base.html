@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>TAPP</title>
+    <title>TAPP - Twitter Automation Evolution</title>
 
 
     <link href="/static/css/bootstrap.css" rel="stylesheet"/>
@@ -17,15 +17,15 @@
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery.oauthpopup.js"></script>
-{#    <script src="/static/js/jquery-impromptu.js" type="application/javascript"></script>#}
-{#    <link href="/static/css/base.css" rel="stylesheet"/>#}
-{#    <script src="/static/js/smoke.js" type="application/javascript"></script>#}
-{#    <link href="/static/css/smoke.css" rel="stylesheet"/>#}
+    {#    <script src="/static/js/jquery-impromptu.js" type="application/javascript"></script>#}
+    {#    <link href="/static/css/base.css" rel="stylesheet"/>#}
+    {#    <script src="/static/js/smoke.js" type="application/javascript"></script>#}
+    {#    <link href="/static/css/smoke.css" rel="stylesheet"/>#}
 
     <script src="/static/js/base.js"></script>
     <link href="/static/css/styles.css" rel="stylesheet"/>
-{#    <script src="/static/js/select2.min.js" type="application/javascript"></script>#}
-{#    <link href="/static/css/select2.css" rel="stylesheet"/>#}
+    {#    <script src="/static/js/select2.min.js" type="application/javascript"></script>#}
+    {#    <link href="/static/css/select2.css" rel="stylesheet"/>#}
 
     {% block heading %}
     {% endblock %}
@@ -39,9 +39,7 @@
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    {% block brand %}
-                        <a class="navbar-brand" href="/"><img src="/static/img/tapplogo.png" alt="TAPP"/></a>
-                    {% endblock %}
+                    <a class="navbar-brand" href="/"><img src="/static/img/tapplogo.png" alt="TAPP"/></a>
 
                     <button type="button" class="navbar-toggle" data-toggle="collapse"
                             data-target=".navbar-ex1-collapse">
@@ -51,19 +49,27 @@
 
                 <div class="navbar-collapse collapse navbar-ex1-collapse">
                     {% block panelusuario %}
-                        <ul class="nav navbar-nav navbar-right">
-                        {% if request.user.is_authenticated %}
-                            <li><a href="#"><img width="24" height="24" src="{{ request.user.twitterprofile.twitterprofilecredentials.profile_image_url }}"/> {{ request.user.username }}</a></li>
-                            <li><a href="/tw/logout"><i class="fa fa-power-off"></i> Exit</a></li>
-                        {% else %}
-                            <li>
-                                <button id="connect" class="navbar-btn btn btn-info"><i class="fa fa-twitter"></i> Login with Twitter</button>
-                            </li>
-                        {% endif %}
+                        <ul class="nav navbar-nav">
+                            <li><a href="/features">Features</a></li>
+                            <li><a href="/pricing">Pricing</a></li>
+                            <li><a href="/about">About</a></li>
                         </ul>
-{#                        <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">#}
-{#                            <li><a href="/olvido" class="btn btn-link">Olvide mis credenciales</a></li>#}
-{#                        </ul>#}
+
+
+                        <ul class="nav navbar-nav navbar-right">
+                            {% if request.user.is_authenticated %}
+                                <li><a href="#"><img width="24" height="24" src="{{ request.user.twitterprofile.twitterprofilecredentials.profile_image_url }}"/> {{ request.user.username }}</a></li>
+                                <li><a href="/tw/logout"><i class="fa fa-power-off"></i> Exit</a></li>
+                            {% else %}
+
+
+
+                                <li><button id="connect" class="navbar-btn btn btn-info"><i class="fa fa-twitter"></i> Login with Twitter</button></li>
+                            {% endif %}
+                        </ul>
+                        {#                        <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">#}
+                        {#                            <li><a href="/olvido" class="btn btn-link">Olvide mis credenciales</a></li>#}
+                        {#                        </ul>#}
                     {% endblock %}
                 </div>
 
@@ -73,32 +79,61 @@
     {% endblock %}
 
     {% if not request.user.is_authenticated %}
-    <div id="splash">
+        <div id="splash">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Twitter Automation Evolution</h1>
+                        <p class="lead">Creative Text-based apps on Twitter Platform.</p>
+                        <p class="lead"><a href="/knowmore" class="btn btn-success btn-lg">Know more...</a> </p>
+                        <p class="lead"><img src="/static/img/appscreenshot.png"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="screenshot">
+
+            </div>
+        </div>
+        <div id="undersplash">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 righttext">
+                        <p class="lead text-right">"Way beyond mobile, integrated Twitter applications<br/> are better way to engage users."</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <b>JORGE FREYRE G.</b><br/>
+                        OKSOFAST S.A. CEO
+                    </div>
+                </div>
+            </div>
+            <div class="screenshot">
+
+            </div>
+        </div>
+
+    {% else %}
+        <!-- Begin page content -->
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1>Twitter Automation Evolution</h1>
-                    <p class="lead">Creative Text-based apps on Twitter Platform.</p>
+                    <ul class="nav nav-pills">
+                        <li {% ifequal section "dashboard" %}class="active"{% endifequal %}><a href="/dashboard"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                        <li {% ifequal section "definitions" %}class="active"{% endifequal %}><a href="/definitions"><i class="fa fa-gears"></i> App Definitions</a></li>
+                        <li {% ifequal section "users" %}class="active"{% endifequal %}><a href="/users"><i class="fa fa-users"></i> Users</a></li>
+                        <li {% ifequal section "analytics" %}class="active"{% endifequal %}><a href="/analytics"><i class="fa fa-bar-chart-o"></i> Analytics</a></li>
+                    </ul>
                 </div>
             </div>
+
+            {% block content %}
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+
+                    </div>
+                </div>
+            {% endblock %}
         </div>
-    </div>
     {% endif %}
-    <!-- Begin page content -->
-    <div class="container">
-        {% block contenido %}
-            <div class="row">
-                <div class="col-lg-8 col-md-8 hidden-sm hidden-xs" id="slogan">
-
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-
-                </div>
-            </div>
-        {% endblock %}
-
-    </div>
 </div>
 
 <div id="footer" class="hidden-sm hidden-xs">
@@ -109,7 +144,7 @@
                 <p class="text-muted credit">TAPP Todos los derechos reservados. <a href="mailto:info@tapp.co"><i class="fa fa-envelope"></i> info@tapp.co</a> o <a href="http://twitter.com/tappco"><i class="fa fa-twitter-square"></i> tappco</a>.</p>
             </div>
             <div class="col-lg-4 col-md-4 patrocinios text-right">
-{#                <img src="/static/img/oksofastlogo.png"/>#}
+                {#                <img src="/static/img/oksofastlogo.png"/>#}
             </div>
 
         </div>
@@ -122,16 +157,16 @@
 
 
 <div class="modal fade" id="waitpanel" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 id="paneltitle">Titulo</h4>
-      </div>
-      <div class="modal-body">
-        <p id="panelbody">One fine body</p>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="paneltitle">Titulo</h4>
+            </div>
+            <div class="modal-body">
+                <p id="panelbody">One fine body</p>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 

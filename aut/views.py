@@ -1,5 +1,6 @@
 # Create your views here.
 import json
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
@@ -9,6 +10,8 @@ from tapp.settings import TWITTER_KEY, TWITTER_SECRET
 
 
 def home(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect("/dashboard")
     data = {"request": request}
     return render_to_response("base.html", data, context_instance=RequestContext(request))
 
@@ -26,3 +29,20 @@ def logged(request):
     credentials.save()
 
     return render_to_response("login_success.html")
+
+
+def add_default_data(request):
+    data = {'request': request}
+    if request.user.is_authenticated():
+        tp = request.user.twitterprofile
+        tpc = tp.twitterprofilecredentials
+        tw = tpc.twython()
+        data.update({"twitterprofile": tp, "twitterprofilecredentials": tpc, "twitter": tw})
+
+    return data
+
+@login_required(login_url='/')
+def dashboard(request):
+    datos = add_default_data(request)
+    datos['section'] = 'dashboard'
+    return render_to_response("dashboard.html", datos, context_instance=RequestContext(request))
